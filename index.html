@@ -417,6 +417,49 @@
     <!-- Custom JavaScript -->
     <script src="js/animate.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<script>
+  // Your Firebase configuration (Replace with your actual config)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDe32YHhTuR70a-GsukeucTKsIek2OlFFU",
+    authDomain: "web-analytics-f00a0.firebaseapp.com",
+    databaseURL: "https://web-analytics-f00a0-default-rtdb.firebaseio.com",
+    projectId: "web-analytics-f00a0",
+    storageBucket: "web-analytics-f00a0.firebasestorage.app",
+    messagingSenderId: "852173998616",
+    appId: "1:852173998616:web:42eba0c6b62bc8cc5dd16d"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Reference to the database
+  const dbRef = firebase.database().ref("contacts");
+
+  // Form submission handling
+  document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get form values
+    let name = document.querySelector("input[placeholder='Your Name']").value;
+    let email = document.querySelector("input[placeholder='Your Email']").value;
+    let message = document.querySelector("textarea").value;
+
+    // Push data to Firebase
+    dbRef.push({
+      name: name,
+      email: email,
+      message: message
+    }).then(() => {
+      alert("Data saved successfully!");
+      document.querySelector("form").reset(); // Clear form
+    }).catch(error => {
+      console.error("Error:", error);
+    });
+  });
+</script>
+
 </body>
 
 </html>
