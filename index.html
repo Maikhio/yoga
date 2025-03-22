@@ -358,13 +358,27 @@
                     <h2>Quick Contact</h2>
                    <form id="contactForm" class="row form-inline">
     <div class="col-md-6 form-group">
-        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+        <input type="text" id="name" class="form-control" placeholder="Your Name" required/>
     </div>
     <div class="col-md-6 form-group">
-        <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+        <input type="email" id="email" class="form-control" placeholder="Your Email" required/>
+    </div>
+    <div class="col-md-6 form-group">
+        <input type="text" id="address" class="form-control" placeholder="Your Address" required/>
+    </div>
+    <div class="col-md-3 form-group">
+        <input type="number" id="age" class="form-control" placeholder="Your Age" required min="0"/>
+    </div>
+    <div class="col-md-3 form-group">
+        <select id="sex" class="form-control" required>
+            <option value="">Select Sex</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
     </div>
     <div class="col-md-12 form-group">
-        <textarea id="message" class="form-control" placeholder="Message" rows="5" cols="70"></textarea>
+        <textarea id="message" class="form-control" placeholder="Message" rows="5" required></textarea>
     </div>
     <div class="col-md-12">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -445,32 +459,34 @@
     const dbRef = firebase.database().ref("contacts");
 
     // Form submission handling
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+     document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-      let name = document.getElementById("name").value;
-      let email = document.getElementById("email").value;
-      let message = document.getElementById("message").value;
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let address = document.getElementById("address").value;
+    let age = document.getElementById("age").value;
+    let sex = document.getElementById("sex").value;
+    let message = document.getElementById("message").value;
 
-      console.log("Captured Data:", { name, email, message });
+    console.log("Captured Data:", { name, email, address, age, sex, message });
 
-      dbRef.push({
-        name: name,
-        email: email,
-        message: message
-      }).then(() => {
-        console.log("✅ Data successfully saved in Firebase!");
-        alert("Data saved successfully!");
-        document.getElementById("contactForm").reset();
-      }).catch(error => {
-        console.error("❌ Firebase Error:", error);
-      });
+    dbRef.push({
+      name: name,
+      email: email,
+      address: address,
+      age: age,
+      sex: sex,
+      message: message
+    }).then(() => {
+      console.log("✅ Data successfully saved in Firebase!");
+      alert("Data saved successfully!");
+      document.getElementById("contactForm").reset();
+    }).catch(error => {
+      console.error("❌ Firebase Error:", error);
     });
-  } else {
-    console.error("❌ Firebase did not load correctly. Check script URLs.");
-  }
+  });
 </script>
-
 </body>
 
 </html>
