@@ -418,8 +418,10 @@
     <script src="js/animate.js"></script>
     <script src="js/custom.js"></script>
 <!-- Firebase Scripts -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<!-- Use Firebase 9 compatible scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+
 <script>
   // Ensure Firebase is loaded
   console.log("Firebase SDK Loaded:", typeof firebase !== "undefined");
@@ -435,7 +437,7 @@
     appId: "1:852173998616:web:42eba0c6b62bc8cc5dd16d"
   };
 
-  // Initialize Firebase
+  // Initialize Firebase (using Firebase 9 compatibility mode)
   firebase.initializeApp(firebaseConfig);
   console.log("✅ Firebase Initialized");
 
