@@ -434,7 +434,6 @@
 <!-- Load Firebase 9 compatible scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
-
 <script>
   // Check if Firebase is loaded
   console.log("Firebase SDK Loaded:", typeof firebase !== "undefined");
@@ -459,34 +458,36 @@
     const dbRef = firebase.database().ref("contacts");
 
     // Form submission handling
-     document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let address = document.getElementById("address").value;
-    let age = document.getElementById("age").value;
-    let sex = document.getElementById("sex").value;
-    let message = document.getElementById("message").value;
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let address = document.getElementById("address").value;
+      let age = document.getElementById("age").value;
+      let sex = document.getElementById("sex").value;
+      let message = document.getElementById("message").value;
 
-    console.log("Captured Data:", { name, email, address, age, sex, message });
+      console.log("Captured Data:", { name, email, address, age, sex, message });
 
-    dbRef.push({
-      name: name,
-      email: email,
-      address: address,
-      age: age,
-      sex: sex,
-      message: message
-    }).then(() => {
-      console.log("✅ Data successfully saved in Firebase!");
-      alert("Data saved successfully!");
-      document.getElementById("contactForm").reset();
-    }).catch(error => {
-      console.error("❌ Firebase Error:", error);
+      dbRef.push({
+        name: name,
+        email: email,
+        address: address,
+        age: age,
+        sex: sex,
+        message: message
+      }).then(() => {
+        console.log("✅ Data successfully saved in Firebase!");
+        alert("Data saved successfully!");
+        document.getElementById("contactForm").reset();
+      }).catch(error => {
+        console.error("❌ Firebase Error:", error);
+      });
     });
-  });
+  }
 </script>
+
 </body>
 
 </html>
