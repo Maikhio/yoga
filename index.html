@@ -421,6 +421,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
 <script>
+  // Ensure Firebase is loaded
+  console.log("Firebase SDK Loaded:", typeof firebase !== "undefined");
+
   // Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyDe32YHhTuR70a-GsukeucTKsIek2OlFFU",
@@ -434,6 +437,7 @@
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  console.log("✅ Firebase Initialized");
 
   // Reference to the database
   const dbRef = firebase.database().ref("contacts");
@@ -442,24 +446,26 @@
   document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Get form values
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let message = document.getElementById("message").value;
 
-    // Push data to Firebase
+    console.log("Captured Data:", { name, email, message });
+
     dbRef.push({
       name: name,
       email: email,
       message: message
     }).then(() => {
+      console.log("✅ Data successfully saved in Firebase!");
       alert("Data saved successfully!");
-      document.getElementById("contactForm").reset(); // Clear form
+      document.getElementById("contactForm").reset();
     }).catch(error => {
-      console.error("Error:", error);
+      console.error("❌ Firebase Error:", error);
     });
   });
 </script>
+
 </body>
 
 </html>
