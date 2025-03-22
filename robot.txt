@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block Firebase internal URLs from being crawled
+Disallow: /lp?
+Disallow: /api/
+
+Sitemap: https://maikhio.github.io/yoga/sitemap.xml
