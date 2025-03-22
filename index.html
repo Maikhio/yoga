@@ -356,20 +356,20 @@
                 <div class="col-lg-1 col-md-12 col-12"></div>
                 <div class="col-lg-5 col-md-12 col-12 columns-2">
                     <h2>Quick Contact</h2>
-                    <form class="row form-inline">
-                        <div class="col-md-6 form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required/>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required/>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <textarea class="form-control" placeholder="Message" rows="5" cols="70"></textarea>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                   <form id="contactForm" class="row form-inline">
+    <div class="col-md-6 form-group">
+        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+    </div>
+    <div class="col-md-6 form-group">
+        <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+    </div>
+    <div class="col-md-12 form-group">
+        <textarea id="message" class="form-control" placeholder="Message" rows="5" cols="70"></textarea>
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
                 </div>
             </div>
         </div>
@@ -417,16 +417,17 @@
     <!-- Custom JavaScript -->
     <script src="js/animate.js"></script>
     <script src="js/custom.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
 <script>
-  // Your Firebase configuration (Replace with your actual config)
+  // Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyDe32YHhTuR70a-GsukeucTKsIek2OlFFU",
     authDomain: "web-analytics-f00a0.firebaseapp.com",
     databaseURL: "https://web-analytics-f00a0-default-rtdb.firebaseio.com",
     projectId: "web-analytics-f00a0",
-    storageBucket: "web-analytics-f00a0.firebasestorage.app",
+    storageBucket: "web-analytics-f00a0.appspot.com",
     messagingSenderId: "852173998616",
     appId: "1:852173998616:web:42eba0c6b62bc8cc5dd16d"
   };
@@ -438,13 +439,13 @@
   const dbRef = firebase.database().ref("contacts");
 
   // Form submission handling
-  document.querySelector("form").addEventListener("submit", function(event) {
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     // Get form values
-    let name = document.querySelector("input[placeholder='Your Name']").value;
-    let email = document.querySelector("input[placeholder='Your Email']").value;
-    let message = document.querySelector("textarea").value;
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
 
     // Push data to Firebase
     dbRef.push({
@@ -453,13 +454,12 @@
       message: message
     }).then(() => {
       alert("Data saved successfully!");
-      document.querySelector("form").reset(); // Clear form
+      document.getElementById("contactForm").reset(); // Clear form
     }).catch(error => {
       console.error("Error:", error);
     });
   });
 </script>
-
 </body>
 
 </html>
